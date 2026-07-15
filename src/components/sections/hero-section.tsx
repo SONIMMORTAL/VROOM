@@ -20,10 +20,10 @@ export default function HeroSection() {
         TOP HALF: THE IMMERSIVE BILLBOARD
         ====================================================================
       */}
-      <div className="relative w-full pt-32 pb-36 md:pt-40 md:pb-48 flex flex-col items-center justify-center text-center">
+      <div className="relative w-full min-h-[85vh] md:min-h-0 pt-28 pb-32 sm:pt-32 sm:pb-36 md:pt-40 md:pb-48 flex flex-col items-center justify-center text-center">
         {/* Background Image & Overlays — branded fleet at golden hour */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-[center_30%] sm:bg-center bg-no-repeat"
           style={{ backgroundImage: 'url("/generated-image.png")' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-void/85 via-void/60 to-void/90" />
@@ -36,36 +36,36 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-gold/10 border border-gold/30 backdrop-blur-md mb-8">
-              <span className="text-sm font-bold text-gold-light tracking-[0.25em] uppercase">
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 rounded-full bg-gold/10 border border-gold/30 backdrop-blur-md mb-6 sm:mb-8">
+              <span className="text-xs sm:text-sm font-bold text-gold-light tracking-[0.2em] sm:tracking-[0.25em] uppercase">
                 {SITE.tagline}
               </span>
               <span className="w-1 h-1 rounded-full bg-gold" />
-              <span className="text-sm font-bold text-gold-light tracking-[0.25em] uppercase">
+              <span className="text-xs sm:text-sm font-bold text-gold-light tracking-[0.2em] sm:tracking-[0.25em] uppercase">
                 Est. 2011
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-snow uppercase tracking-tighter leading-[0.95] drop-shadow-2xl">
+            <h1 className="text-[2.75rem] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black text-snow uppercase tracking-tighter leading-[0.90] sm:leading-[0.95] drop-shadow-2xl">
               Your Career <br />
               <span className="text-gold-gradient">In High Gear</span>
             </h1>
 
-            <p className="mt-8 text-xl md:text-2xl text-snow/90 font-medium max-w-2xl leading-relaxed">
+            <p className="mt-5 sm:mt-8 text-base sm:text-xl md:text-2xl text-snow/90 font-medium max-w-2xl leading-relaxed px-2 sm:px-0">
               Earn your Class A or B CDL in weeks. Professional, bilingual instruction
               backed by 13+ years of putting drivers behind the wheel.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+            <div className="mt-7 sm:mt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto px-2 sm:px-0">
               <a
                 href="#apply"
-                className="bg-crimson hover:bg-crimson-deep text-snow rounded-xl px-10 py-5 text-lg font-extrabold uppercase tracking-widest shadow-[0_0_40px_-10px_#8E1F2C] transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full sm:w-auto text-center bg-crimson hover:bg-crimson-deep text-snow rounded-xl px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-extrabold uppercase tracking-widest shadow-[0_0_40px_-10px_#8E1F2C] transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 Apply Now
               </a>
               <a
                 href={SITE.phoneHref}
-                className="flex items-center gap-3 rounded-xl px-10 py-5 text-lg font-bold uppercase tracking-widest border border-gold/40 text-gold-light hover:bg-gold/10 backdrop-blur-md transition-all whitespace-nowrap"
+                className="w-full sm:w-auto text-center flex items-center justify-center gap-3 rounded-xl px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-bold uppercase tracking-widest border border-gold/40 text-gold-light hover:bg-gold/10 backdrop-blur-md transition-all whitespace-nowrap"
               >
                 <Phone className="w-5 h-5 flex-shrink-0" />
                 {SITE.phone}
