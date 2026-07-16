@@ -36,16 +36,6 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 rounded-full bg-gold/10 border border-gold/30 backdrop-blur-md mb-6 sm:mb-8">
-              <span className="text-xs sm:text-sm font-bold text-gold-light tracking-[0.2em] sm:tracking-[0.25em] uppercase">
-                {SITE.tagline}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-gold" />
-              <span className="text-xs sm:text-sm font-bold text-gold-light tracking-[0.2em] sm:tracking-[0.25em] uppercase">
-                Est. 2011
-              </span>
-            </div>
-
             <h1 className="text-[2.75rem] sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black text-snow uppercase tracking-tighter leading-[0.90] sm:leading-[0.95] drop-shadow-2xl">
               Your Career <br />
               <span className="text-gold-gradient">In High Gear</span>
@@ -103,7 +93,7 @@ export default function HeroSection() {
               className="lg:col-span-7 pt-16 md:pt-40 pr-0 lg:pr-16"
             >
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-crimson mb-4">
-                Why Interstate Connections
+                Why CDL Training Solutions
               </p>
               <h2 className="text-3xl md:text-4xl font-extrabold text-void uppercase tracking-tight mb-10">
                 Built to Get You Hired.

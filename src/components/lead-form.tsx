@@ -142,7 +142,7 @@ export default function LeadForm({
       </Button>
 
       <p className={`text-center text-[10px] mt-4 font-medium leading-relaxed px-2 ${dark ? 'text-snow/40' : 'text-charcoal/50'}`}>
-        By submitting, you consent to receive calls and texts from {SITE.name}. Secure and confidential.
+        By submitting, you consent to receive calls and texts from {SITE.legalName}. Secure and confidential.
       </p>
     </form>
   );

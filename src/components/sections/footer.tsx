@@ -88,6 +88,12 @@ export default function Footer() {
                 className="h-20 w-auto"
               />
             </a>
+            <p className="text-lg font-extrabold text-void uppercase tracking-tight leading-none mb-1.5">
+              {SITE.name}
+            </p>
+            <p className="text-[10px] font-bold text-gold uppercase tracking-[0.25em] mb-5">
+              {SITE.legalName}
+            </p>
             <p className="text-charcoal/70 font-medium mb-8 max-w-sm leading-relaxed">
               Professional CDL training backed by 13+ years of experience. FMCSA compliant
               and dedicated to producing safe, professional drivers.
@@ -143,7 +149,7 @@ export default function Footer() {
         {/* BOTTOM BAR */}
         <div className="border-t border-charcoal/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-charcoal/60 font-medium text-sm text-center md:text-left">
-            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
+            © {new Date().getFullYear()} {SITE.name} · {SITE.legalName}. All rights reserved.
           </p>
           <a
             href={SITE.emailHref}

@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Interstate Connections LLC | CDL Training Solutions",
+  title: "CDL Training Solutions | Class A & B CDL Training | Interstate Connections LLC",
   description:
-    "Professional Class A & B CDL training backed by 13+ years of experience. Bilingual instruction, flexible scheduling, and financial aid for those who qualify. Call (845) 663-5613 or email Info@interstateconnections.org.",
+    "CDL Training Solutions — professional Class A & B CDL training backed by 13+ years of experience. Bilingual instruction, flexible scheduling, and financial aid for those who qualify. Call (845) 663-5613 or email Info@interstateconnections.org.",
   keywords: [
     "CDL training",
     "Class A CDL",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "bilingual CDL training",
   ],
   openGraph: {
-    title: "Interstate Connections LLC | CDL Training Solutions",
+    title: "CDL Training Solutions | Interstate Connections LLC",
     description:
       "Professional CDL training backed by 13+ years of experience. Get your career in high gear — call (845) 663-5613.",
     type: "website",

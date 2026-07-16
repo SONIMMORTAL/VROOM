@@ -72,11 +72,11 @@ export default function Navbar() {
                 className="h-12 md:h-16 w-auto drop-shadow-sm"
               />
               <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-extrabold text-void leading-tight tracking-tight uppercase">
-                  Interstate
-                </span>
-                <span className="text-[10px] md:text-xs font-bold text-gold uppercase tracking-[0.2em] leading-none mt-0.5">
+                <span className="text-lg md:text-[1.35rem] font-extrabold text-void leading-tight tracking-tight uppercase whitespace-nowrap">
                   CDL Training Solutions
+                </span>
+                <span className="text-[9px] md:text-[10px] font-bold text-gold uppercase tracking-[0.25em] leading-none mt-1">
+                  Interstate Connections LLC
                 </span>
               </div>
             </a>

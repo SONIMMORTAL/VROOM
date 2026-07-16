@@ -1,6 +1,8 @@
 export const SITE = {
-  name: 'Interstate Connections LLC',
-  tagline: 'CDL Training Solutions',
+  /** Public-facing company name. */
+  name: 'CDL Training Solutions',
+  /** Legal entity behind the school. */
+  legalName: 'Interstate Connections LLC',
   phone: '(845) 663-5613',
   phoneHref: 'tel:+18456635613',
   email: 'Info@interstateconnections.org',
