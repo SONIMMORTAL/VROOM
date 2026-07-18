@@ -10,7 +10,7 @@ const services = [
     tag: 'Flagship Program',
     featured: true,
     dark: true,
-    bgImage: '/AB.jpg',
+    bgImage: '/class-a.webp',
     href: '#pricing',
   },
   {
@@ -18,7 +18,7 @@ const services = [
     desc: 'Build confidence operating straight trucks, local-delivery vehicles, and other Class B commercial vehicles.',
     featured: false,
     dark: false,
-    bgImage: '/herosection.jpg',
+    bgImage: '/class-b.webp',
     href: '#pricing',
   },
   {
@@ -26,7 +26,7 @@ const services = [
     desc: 'Prepare for passenger, school-bus, and related endorsement requirements.',
     featured: false,
     dark: false,
-    bgImage: '/CLASSBCDL.png',
+    bgImage: '/bus.webp',
     href: '#pricing',
   },
   {
@@ -34,7 +34,7 @@ const services = [
     desc: 'Get hands-on practice with 10-speed manual transmission shifting or automatic-transmission operation.',
     featured: false,
     dark: false,
-    bgImage: '/CDLMEDIA.png',
+    bgImage: '/shifting.webp',
     href: '#pricing',
   },
   {
@@ -42,7 +42,7 @@ const services = [
     desc: 'Sharpen your skills, regain confidence, and prepare for real-world commercial driving.',
     featured: false,
     dark: false,
-    bgImage: '/CDLIMAGE.jpg',
+    bgImage: '/refresher.webp',
     href: '#pricing',
   },
   {
@@ -50,16 +50,16 @@ const services = [
     desc: 'Choose daytime, night, or weekend classes that work around your schedule.',
     featured: false,
     dark: true,
-    bgImage: '/nightclass.jpg',
+    bgImage: '/night.webp',
     href: '#schedule',
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section id="programs" className="py-24 bg-[#F5F3EF] relative overflow-hidden scroll-mt-24">
+    <section id="programs" className="py-16 md:py-24 bg-[#F5F3EF] relative overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-5 md:gap-6">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-crimson mb-4">
               Programs

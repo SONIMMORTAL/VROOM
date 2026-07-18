@@ -27,20 +27,20 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-snow border-t border-charcoal/10 pt-16">
+    <footer className="bg-snow border-t border-charcoal/10 pt-12 md:pt-16">
       {/* PRE-FOOTER CTA BAND */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 md:mb-16 relative z-20">
         <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(201,162,39,0.35)] bg-void group">
           {/* Branded highway shot */}
           <div
             className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-1000 group-hover:scale-105"
-            style={{ backgroundImage: 'url("/cta-highway.jpg")' }}
+            style={{ backgroundImage: 'url("/cta-highway.webp")' }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-void/95 via-void/80 to-void/50 z-0" />
           <div className="absolute bottom-0 left-0 right-0 gold-hairline z-10" />
           <div className="absolute top-0 left-0 right-0 gold-hairline z-10" />
 
-          <div className="relative z-10 px-8 md:px-14 py-16 md:py-20 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-10">
+          <div className="relative z-10 px-6 sm:px-8 md:px-14 py-12 md:py-20 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-10">
             <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-5">
                 Next Class Starts Soon
@@ -83,7 +83,7 @@ export default function Footer() {
             <a href="#top" className="inline-block mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/logo-shield.png"
+                src="/logo-shield.webp"
                 alt="Interstate Connections LLC shield logo"
                 className="h-20 w-auto"
               />

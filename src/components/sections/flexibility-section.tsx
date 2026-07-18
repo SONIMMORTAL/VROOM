@@ -22,10 +22,10 @@ export default function FlexibilitySection() {
   return (
     <section
       id="financial-aid"
-      className="py-24 bg-snow border-t border-charcoal/5 relative overflow-hidden scroll-mt-24"
+      className="py-16 md:py-24 bg-snow border-t border-charcoal/5 relative overflow-hidden scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-14 items-center">
           {/* Left: Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -80,7 +80,7 @@ export default function FlexibilitySection() {
             {/* Background offset image for depth */}
             <div
               className="absolute -top-12 -right-12 w-3/4 h-3/4 rounded-[2rem] bg-cover bg-center shadow-lg opacity-40"
-              style={{ backgroundImage: 'url("/CDLMEDIA.png")' }}
+              style={{ backgroundImage: 'url("/shifting.webp")' }}
             />
 
             <div className="relative bg-white rounded-[2rem] p-8 md:p-12 shadow-premium border border-charcoal/10">

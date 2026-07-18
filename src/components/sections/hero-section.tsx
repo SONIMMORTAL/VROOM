@@ -23,8 +23,7 @@ export default function HeroSection() {
       <div className="relative w-full min-h-[85vh] md:min-h-0 pt-28 pb-32 sm:pt-32 sm:pb-36 md:pt-40 md:pb-48 flex flex-col items-center justify-center text-center">
         {/* Background Image & Overlays — branded fleet at golden hour */}
         <div
-          className="absolute inset-0 bg-cover bg-[center_30%] sm:bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url("/generated-image.png")' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/hero-mobile.webp')] md:bg-[url('/hero.webp')]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-void/85 via-void/60 to-void/90" />
 

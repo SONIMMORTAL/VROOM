@@ -57,11 +57,11 @@ export default function SchedulePricingSection() {
   return (
     <section
       id="pricing"
-      className="py-24 bg-[#F5F3EF] relative z-10 border-t border-charcoal/5 scroll-mt-24"
+      className="py-16 md:py-24 bg-[#F5F3EF] relative z-10 border-t border-charcoal/5 scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-crimson mb-4">
             Pricing & Schedule
           </p>
