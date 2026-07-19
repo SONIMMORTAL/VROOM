@@ -92,7 +92,7 @@ export default function HeroSection() {
               className="lg:col-span-7 pt-16 md:pt-40 pr-0 lg:pr-16"
             >
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-crimson mb-4">
-                Why CDL Training Solutions
+                Why Interstate Connections
               </p>
               <h2 className="text-3xl md:text-4xl font-extrabold text-void uppercase tracking-tight mb-10">
                 Built to Get You Hired.

@@ -1,6 +1,6 @@
 export const SITE = {
   /** Public-facing company name. */
-  name: 'CDL Training Solutions',
+  name: 'Interstate Connections',
   /** Legal entity behind the school. */
   legalName: 'Interstate Connections LLC',
   phone: '(845) 663-5613',

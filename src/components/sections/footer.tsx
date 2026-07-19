@@ -92,7 +92,7 @@ export default function Footer() {
               {SITE.name}
             </p>
             <p className="text-[10px] font-bold text-gold uppercase tracking-[0.25em] mb-5">
-              {SITE.legalName}
+              Logistics &amp; Training Solutions
             </p>
             <p className="text-charcoal/70 font-medium mb-8 max-w-sm leading-relaxed">
               Professional CDL training backed by 13+ years of experience. FMCSA compliant
