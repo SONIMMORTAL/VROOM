@@ -68,15 +68,15 @@ export default function Navbar() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo-shield.webp"
-                alt="Interstate Connections LLC shield logo"
+                alt="Interstate Connections shield logo"
                 className="h-10 sm:h-12 md:h-16 w-auto drop-shadow-sm flex-shrink-0"
               />
               <div className="flex flex-col">
                 <span className="text-[0.95rem] sm:text-lg md:text-[1.35rem] font-extrabold text-void leading-tight tracking-tight uppercase whitespace-nowrap">
-                  CDL Training Solutions
+                  Interstate Connections
                 </span>
-                <span className="text-[9px] md:text-[10px] font-bold text-gold uppercase tracking-[0.25em] leading-none mt-1">
-                  Interstate Connections LLC
+                <span className="text-[9px] md:text-[10px] font-bold text-gold uppercase tracking-[0.22em] leading-none mt-1">
+                  Logistics &amp; Training Solutions
                 </span>
               </div>
             </a>

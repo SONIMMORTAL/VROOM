@@ -1,5 +1,6 @@
 import Navbar from '@/components/sections/navbar';
 import HeroSection from '@/components/sections/hero-section';
+import DriverCallout from '@/components/sections/driver-callout';
 import StatsSection from '@/components/sections/stats-section';
 import ServicesSection from '@/components/sections/services-section';
 import FlexibilitySection from '@/components/sections/flexibility-section';
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen bg-snow text-void font-sans">
       <Navbar />
       <HeroSection />
+      <DriverCallout />
       <StatsSection />
       <ServicesSection />
       <FlexibilitySection />
