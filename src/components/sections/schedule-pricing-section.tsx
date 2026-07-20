@@ -78,7 +78,7 @@ export default function SchedulePricingSection() {
 
         {/* Schedule Toggle Area */}
         <div id="schedule" className="mb-14 flex flex-col items-center scroll-mt-32">
-          <div className="bg-white p-1.5 rounded-full inline-flex relative shadow-sm border border-charcoal/10">
+          <div className="bg-white p-1.5 rounded-full inline-grid grid-cols-2 relative shadow-sm border border-charcoal/10">
             <button
               onClick={() => setScheduleType('weekday')}
               className={`relative z-10 px-8 py-3 text-sm font-bold rounded-full transition-colors ${
@@ -98,10 +98,8 @@ export default function SchedulePricingSection() {
 
             {/* Active Pill background */}
             <div
-              className={`absolute top-1.5 bottom-1.5 w-[calc(50%-0.375rem)] bg-void rounded-full transition-transform duration-300 ease-in-out ${
-                scheduleType === 'weekday'
-                  ? 'translate-x-0 left-1.5'
-                  : 'translate-x-full left-[calc(50%-0.375rem)]'
+              className={`absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-0.375rem)] bg-void rounded-full transition-transform duration-300 ease-in-out ${
+                scheduleType === 'weekday' ? 'translate-x-0' : 'translate-x-full'
               }`}
             />
           </div>
