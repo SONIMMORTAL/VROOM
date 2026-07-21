@@ -79,7 +79,7 @@ export default function FlexibilitySection() {
           >
             {/* Background offset image for depth */}
             <div
-              className="absolute -top-12 -right-12 w-3/4 h-3/4 rounded-[2rem] bg-cover bg-center shadow-lg opacity-40"
+              className="bg-stable absolute -top-12 -right-12 w-3/4 h-3/4 rounded-[2rem] bg-cover bg-center shadow-lg opacity-40"
               style={{ backgroundImage: 'url("/shifting.webp")' }}
             />
 

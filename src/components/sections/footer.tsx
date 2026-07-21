@@ -33,7 +33,7 @@ export default function Footer() {
         <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(201,162,39,0.35)] bg-void group">
           {/* Branded highway shot */}
           <div
-            className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-1000 group-hover:scale-105"
+            className="bg-stable absolute inset-0 bg-cover bg-center z-0 transition-transform duration-1000 group-hover:scale-105"
             style={{ backgroundImage: 'url("/cta-highway.webp")' }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-void/95 via-void/80 to-void/50 z-0" />

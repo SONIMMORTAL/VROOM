@@ -146,6 +146,16 @@
   box-shadow: 0 20px 40px -10px rgba(11, 10, 8, 0.08);
 }
 
+/* ═══ STABLE GPU LAYER (prevents mobile background-image flicker on scroll) ═══ */
+.bg-stable {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
 /* ═══ SUBTLE GRID OVERLAY ═══ */
 .grid-overlay {
   background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),

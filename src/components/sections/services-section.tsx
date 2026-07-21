@@ -90,7 +90,7 @@ export default function ServicesSection() {
             >
               {/* Background image */}
               <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-105 z-0"
+                className="bg-stable absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-105 z-0"
                 style={{ backgroundImage: `url(${service.bgImage})` }}
               />
 
