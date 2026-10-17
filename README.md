@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Interstate Connections
 
-## Getting Started
+A responsive CDL training and admissions site built with Next.js 16 and React 19. The production build exports static files for GoDaddy or another static host.
 
-First, run the development server:
+## Develop and preview
 
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To build and preview the deployable site:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000. Upload the **contents** of `out/` to the hosting document root. Keep `_next/`, `privacy/`, and all image files together. No Node.js server or image optimization service is needed on the host. The build downloads the Google font once; visitors receive the bundled font from the site.
 
-## Learn More
+## Quality checks
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run lint
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The browser suite previews `out/` on port 4173. It checks navigation, contact links, program selection, schedules, form validation and mocked provider responses, mobile widths, keyboard navigation, privacy, and automated WCAG accessibility rules. It never sends a real inquiry. If using an existing Chromium installation, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to its executable.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Public domain and social sharing
 
-## Deploy on Vercel
+Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS website address before the production build. Until that address is confirmed, the site includes titles and descriptions but omits absolute social-image URLs to avoid publishing localhost or an assumed domain. The social image is ready at `public/social-preview.png`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Dependency security
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js and its ESLint configuration are pinned to 16.4.2. An unused shadcn CLI was removed and compatible transitive fixes applied. The local preview server uses patched compression. Five remaining audit entries are the same upstream `braces` advisory propagated through the development-only Next.js ESLint plugin; the registry offers no compatible fix. Do not apply the suggested forced downgrade to Next.js 14. Production dependencies are audited separately.
+
+## Content and admissions
+
+- Shared business contact details: `src/lib/site.ts`.
+- Public phone: **(845) 383-1299**; telephone links use `tel:+18453831299`.
+- Tuition and schedules retain the prior site's published values. Admissions should confirm current prices, inclusions, funding eligibility, and availability before launch.
+- Inquiries use the existing FormSubmit endpoint and admissions inbox. The interface validates required details, records explicit contact permission, checks the provider's success response, times out stalled requests, and preserves entries on failure.
+- FormSubmit inbox activation and real delivery must be verified by the account owner. Automated tests intercept requests; they do not establish deliverability.
+- The inquiry privacy notice explains the fields collected, the processing provider, and how to contact admissions. Confirm the notice matches actual business practices.
+
+## Visual assets
+
+New generated hero and Class B illustrations are optimized and stored in `public/`. Existing source assets remain intact. See `docs/asset-notes.md` for generation prompts and provenance. The hero and program illustrations are aspirational imagery, not photographs of the school's actual fleet.

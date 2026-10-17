@@ -1,25 +1,42 @@
-import Navbar from '@/components/sections/navbar';
-import HeroSection from '@/components/sections/hero-section';
-import DriverCallout from '@/components/sections/driver-callout';
-import StatsSection from '@/components/sections/stats-section';
-import ServicesSection from '@/components/sections/services-section';
-import FlexibilitySection from '@/components/sections/flexibility-section';
-import SchedulePricingSection from '@/components/sections/schedule-pricing-section';
-import FaqSection from '@/components/sections/faq-section';
-import Footer from '@/components/sections/footer';
+import Navbar from "@/components/sections/navbar";
+import HeroSection from "@/components/sections/hero-section";
+import ServicesSection from "@/components/sections/services-section";
+import FlexibilitySection from "@/components/sections/flexibility-section";
+import SchedulePricingSection from "@/components/sections/schedule-pricing-section";
+import FaqSection from "@/components/sections/faq-section";
+import Footer from "@/components/sections/footer";
+import { SITE } from "@/lib/site";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-snow text-void font-sans">
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Navbar />
-      <HeroSection />
-      <DriverCallout />
-      <StatsSection />
-      <ServicesSection />
-      <FlexibilitySection />
-      <SchedulePricingSection />
-      <FaqSection />
+      <main id="main">
+        <HeroSection />
+        <ServicesSection />
+        <FlexibilitySection />
+        <SchedulePricingSection />
+        <FaqSection />
+      </main>
       <Footer />
-    </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            name: SITE.name,
+            legalName: SITE.legalName,
+            telephone: "+18453831299",
+            email: SITE.email,
+            description:
+              "Professional Class A and Class B CDL training with bilingual instruction and flexible scheduling.",
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
+    </>
   );
 }

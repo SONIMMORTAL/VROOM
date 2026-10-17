@@ -1,148 +1,217 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ArrowRight, CheckCircle2, LoaderCircle } from 'lucide-react';
-import { SITE } from '@/lib/site';
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, CheckCircle2, LoaderCircle } from "lucide-react";
+import { SITE } from "@/lib/site";
 
-type Status = 'idle' | 'sending' | 'sent' | 'error';
+type Status = "idle" | "sending" | "sent" | "error";
+const programs = [
+  "Class A CDL Training",
+  "Class B CDL Training",
+  "Manual & Shifting Courses",
+  "Refresher & On-the-Job Training",
+  "School & Charter Bus Training",
+  "Help me choose a program",
+];
 
-/**
- * Shared inquiry form. Submits via FormSubmit so every inquiry lands in
- * the Info@interstateconnections.org inbox — no backend required.
- */
 export default function LeadForm({
-  variant,
   sourceLabel,
-  submitLabel = 'Get Started',
+  submitLabel = "Request information",
 }: {
-  variant: 'dark' | 'light';
+  variant: "dark" | "light";
   sourceLabel: string;
   submitLabel?: string;
 }) {
-  const [status, setStatus] = useState<Status>('idle');
-  const dark = variant === 'dark';
+  const [status, setStatus] = useState<Status>("idle");
+  const programSelect = useRef<HTMLSelectElement>(null);
+  const confirmation = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const program = new URLSearchParams(window.location.search).get("program");
+    if (program && programs.includes(program) && programSelect.current)
+      programSelect.current.value = program;
+  }, []);
+  useEffect(() => {
+    if (status === "sent") confirmation.current?.focus();
+  }, [status]);
 
-  const labelCls = dark
-    ? 'text-[10px] font-bold uppercase tracking-widest text-snow/50 ml-1'
-    : 'text-xs font-bold uppercase tracking-wider text-charcoal/70 ml-1';
-  const inputCls = dark
-    ? 'bg-snow/5 border-white/10 h-14 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold text-snow placeholder:text-snow/20 font-medium'
-    : 'bg-[#F5F3EF] border-charcoal/10 h-12 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold text-void font-medium';
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+    const form = event.currentTarget;
+    const phone = form.elements.namedItem("Phone") as HTMLInputElement;
+    if (phone.value.replace(/\D/g, "").length < 10) {
+      phone.setCustomValidity("Enter a phone number with at least 10 digits.");
+      phone.reportValidity();
+      return;
+    }
     const data = Object.fromEntries(new FormData(form).entries());
-    setStatus('sending');
+    if (data._honey) return;
+    setStatus("sending");
     try {
-      const res = await fetch(SITE.formEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      const response = await fetch(SITE.formEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           ...data,
-          _subject: `New CDL inquiry — ${sourceLabel}`,
-          _template: 'table',
+          _subject: `CDL program inquiry — ${sourceLabel}`,
+          _template: "table",
         }),
+        signal: AbortSignal.timeout(20000),
       });
-      if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`);
-      setStatus('sent');
+      const result = await response.json();
+      if (
+        !response.ok ||
+        (result.success !== true && result.success !== "true")
+      )
+        throw new Error("Submission unsuccessful");
+      setStatus("sent");
       form.reset();
     } catch {
-      setStatus('error');
+      setStatus("error");
     }
   }
 
-  if (status === 'sent') {
+  if (status === "sent")
     return (
-      <div className={`flex flex-col items-center text-center py-10 ${dark ? 'text-snow' : 'text-void'}`}>
-        <div className="w-16 h-16 rounded-full bg-gold/15 flex items-center justify-center mb-5">
-          <CheckCircle2 className="w-8 h-8 text-gold" />
-        </div>
-        <h4 className="text-2xl font-extrabold tracking-tight">Request Received</h4>
-        <p className={`mt-3 text-sm font-medium leading-relaxed max-w-xs ${dark ? 'text-snow/60' : 'text-charcoal/70'}`}>
-          Our admissions team will reach out within 24 hours. Need answers now? Call{' '}
-          <a href={SITE.phoneHref} className="text-gold font-bold whitespace-nowrap">{SITE.phone}</a>.
+      <div
+        className="form-success"
+        ref={confirmation}
+        tabIndex={-1}
+        role="status"
+      >
+        <CheckCircle2 size={42} />
+        <h4>Thanks for taking the first step.</h4>
+        <p>
+          Your inquiry was submitted. Our admissions team will be in touch to
+          talk through your options.
         </p>
+        <p>
+          Want to speak sooner? <a href={SITE.phoneHref}>{SITE.phone}</a>
+        </p>
+        <button className="text-link" onClick={() => setStatus("idle")}>
+          Send another inquiry <ArrowUpRight size={16} />
+        </button>
       </div>
     );
-  }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label htmlFor={`${sourceLabel}-first`} className={labelCls}>First Name</label>
-          <Input id={`${sourceLabel}-first`} name="First Name" placeholder="John" required className={inputCls} />
-        </div>
-        <div className="space-y-1.5">
-          <label htmlFor={`${sourceLabel}-last`} className={labelCls}>Last Name</label>
-          <Input id={`${sourceLabel}-last`} name="Last Name" placeholder="Doe" required className={inputCls} />
-        </div>
+    <form
+      className="lead-form"
+      onSubmit={handleSubmit}
+      aria-busy={status === "sending"}
+    >
+      <div className="form-row">
+        <label htmlFor="first-name">
+          First name
+          <input
+            id="first-name"
+            name="First Name"
+            autoComplete="given-name"
+            placeholder="First name"
+            maxLength={80}
+            required
+          />
+        </label>
+        <label htmlFor="last-name">
+          Last name
+          <input
+            id="last-name"
+            name="Last Name"
+            autoComplete="family-name"
+            placeholder="Last name"
+            maxLength={80}
+            required
+          />
+        </label>
       </div>
-
-      <div className="space-y-1.5">
-        <label htmlFor={`${sourceLabel}-phone`} className={labelCls}>Phone Number</label>
-        <Input
-          id={`${sourceLabel}-phone`}
+      <label htmlFor="phone">
+        Phone number
+        <input
+          id="phone"
           name="Phone"
+          onChange={(event) => event.currentTarget.setCustomValidity("")}
           type="tel"
+          autoComplete="tel"
           placeholder="(845) 000-0000"
+          minLength={10}
+          maxLength={25}
           required
-          className={inputCls}
         />
-      </div>
-
-      <div className="space-y-1.5">
-        <label htmlFor={`${sourceLabel}-program`} className={labelCls}>Program of Interest</label>
+      </label>
+      <label htmlFor="email">
+        Email address <span className="optional">(optional)</span>
+        <input
+          id="email"
+          name="Email"
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          maxLength={254}
+        />
+      </label>
+      <label htmlFor="program">
+        I’m interested in
         <select
-          id={`${sourceLabel}-program`}
+          id="program"
           name="Program"
-          className={`flex h-12 w-full rounded-xl border px-3 py-2 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold ${
-            dark
-              ? 'bg-snow/5 border-white/10 text-snow [&>option]:text-void'
-              : 'bg-[#F5F3EF] border-charcoal/10 text-void'
-          }`}
+          ref={programSelect}
+          defaultValue=""
+          required
         >
-          <option>Class A CDL Training</option>
-          <option>Class B CDL Training</option>
-          <option>Manual &amp; Shifting Courses</option>
-          <option>Refresher &amp; On-the-Job Training</option>
-          <option>School &amp; Charter Bus Training</option>
+          <option value="" disabled>
+            Select a program
+          </option>
+          {programs.map((program) => (
+            <option key={program}>{program}</option>
+          ))}
         </select>
+      </label>
+      <div className="honeypot" aria-hidden="true">
+        <label htmlFor="website">
+          Leave this field empty
+          <input id="website" name="_honey" autoComplete="off" tabIndex={-1} />
+        </label>
       </div>
-
-      {status === 'error' && (
-        <p className="text-sm font-semibold text-crimson bg-crimson/10 border border-crimson/20 rounded-xl px-4 py-3">
-          Something went wrong sending your request. Please call{' '}
-          <a href={SITE.phoneHref} className="underline whitespace-nowrap">{SITE.phone}</a> or email{' '}
-          <a href={SITE.emailHref} className="underline">{SITE.email}</a>.
+      <label className="consent">
+        <input
+          type="checkbox"
+          name="Contact permission"
+          value="Agreed"
+          required
+        />
+        <span>
+          I agree to be contacted by {SITE.name} about my inquiry by phone,
+          text, or email. <a href="/privacy">Privacy notice</a>.
+        </span>
+      </label>
+      {status === "error" && (
+        <p className="form-error" role="alert">
+          We couldn’t confirm your submission. Your details are still here so
+          you can try again. Or call <a href={SITE.phoneHref}>{SITE.phone}</a>{" "}
+          or <a href={SITE.emailHref}>email admissions</a>.
         </p>
       )}
-
-      <Button
+      <button
+        className="button button-primary form-submit"
         type="submit"
-        disabled={status === 'sending'}
-        className={`w-full h-14 rounded-xl text-lg font-extrabold uppercase tracking-widest mt-2 transition-all hover:scale-[1.02] active:scale-[0.98] ${
-          dark
-            ? 'bg-crimson hover:bg-crimson-deep text-snow shadow-[0_0_40px_-10px_#8E1F2C]'
-            : 'bg-void hover:bg-void/90 text-snow shadow-premium'
-        }`}
+        disabled={status === "sending"}
       >
-        {status === 'sending' ? (
+        {status === "sending" ? (
           <>
-            <LoaderCircle className="w-5 h-5 animate-spin" /> Sending…
+            <LoaderCircle className="spinner" size={18} /> Sending…
           </>
         ) : (
           <>
-            {submitLabel} <ArrowRight className="ml-1 w-5 h-5" />
+            {submitLabel}
+            <ArrowUpRight size={18} />
           </>
         )}
-      </Button>
-
-      <p className={`text-center text-[10px] mt-4 font-medium leading-relaxed px-2 ${dark ? 'text-snow/40' : 'text-charcoal/50'}`}>
-        By submitting, you consent to receive calls and texts from {SITE.legalName}. Secure and confidential.
+      </button>
+      <p className="form-note">
+        No commitment required. We’ll help you find your fit.
       </p>
     </form>
   );
