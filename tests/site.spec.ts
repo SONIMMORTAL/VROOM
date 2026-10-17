@@ -181,3 +181,37 @@ test("static pages and image assets load without runtime errors", async ({
   expect(errors).toEqual([]);
   expect((await page.request.get("/social-preview.png")).status()).toBe(200);
 });
+
+test("published metadata and crawl files use the confirmed domain", async ({
+  page,
+}) => {
+  const origin = "https://www.interstateconnections.co";
+  await page.goto("/");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    origin + "/",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    origin + "/social-preview.png",
+  );
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image",
+  );
+  await page.goto("/privacy/");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    origin + "/privacy/",
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    origin + "/privacy/",
+  );
+  expect(await (await page.request.get("/robots.txt")).text()).toContain(
+    origin + "/sitemap.xml",
+  );
+  const sitemap = await (await page.request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain(`<loc>${origin}/</loc>`);
+  expect(sitemap).toContain(`<loc>${origin}/privacy/</loc>`);
+});

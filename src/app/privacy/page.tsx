@@ -3,6 +3,16 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Inquiry privacy notice",
+  alternates: { canonical: "/privacy/" },
+  openGraph: {
+    title: "Inquiry privacy notice | Interstate Connections",
+    url: new URL("/privacy/", SITE.url).toString(),
+    description:
+      "How information submitted through the Interstate Connections inquiry form is used.",
+    siteName: SITE.name,
+    type: "website",
+    images: [{ url: "/social-preview.png", width: 1200, height: 630 }],
+  },
   description:
     "How information submitted through the Interstate Connections inquiry form is used.",
 };

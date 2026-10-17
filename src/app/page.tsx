@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/sections/navbar";
 import HeroSection from "@/components/sections/hero-section";
 import ServicesSection from "@/components/sections/services-section";
@@ -6,6 +7,8 @@ import SchedulePricingSection from "@/components/sections/schedule-pricing-secti
 import FaqSection from "@/components/sections/faq-section";
 import Footer from "@/components/sections/footer";
 import { SITE } from "@/lib/site";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (
@@ -29,6 +32,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             name: SITE.name,
+            url: SITE.url,
             legalName: SITE.legalName,
             telephone: "+18453831299",
             email: SITE.email,

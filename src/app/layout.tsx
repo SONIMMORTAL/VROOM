@@ -10,7 +10,7 @@ const geist = Geist({
 });
 const title = "Interstate Connections | Class A & B CDL Training";
 const description = `Build your next career with hands-on CDL training, bilingual instruction, and day, evening, and weekend classes. Call ${SITE.phone} to explore your options.`;
-const publicUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const publicUrl = SITE.url;
 const socialImages = publicUrl
   ? [
       {
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: SITE.name,
+    url: publicUrl,
     images: socialImages,
   },
   twitter: {

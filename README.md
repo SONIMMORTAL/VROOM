@@ -31,7 +31,7 @@ The browser suite previews `out/` on port 4173. It checks navigation, contact li
 
 ## Public domain and social sharing
 
-Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS website address before the production build. Until that address is confirmed, the site includes titles and descriptions but omits absolute social-image URLs to avoid publishing localhost or an assumed domain. The social image is ready at `public/social-preview.png`.
+The public domain is **https://www.interstateconnections.co**. Canonical links, Open Graph and Twitter images, structured data, robots.txt, and the sitemap use this address. `NEXT_PUBLIC_SITE_URL` may override it for a different deployment. The social image is at `public/social-preview.png`.
 
 ## Dependency security
 

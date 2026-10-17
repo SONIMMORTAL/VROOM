@@ -1,4 +1,6 @@
 export const SITE = {
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.interstateconnections.co",
   /** Public-facing company name. */
   name: "Interstate Connections",
   /** Legal entity behind the school. */
