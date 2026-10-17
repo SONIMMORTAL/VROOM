@@ -43,3 +43,6 @@ next-env.d.ts
 # browser tests
 /test-results/
 /playwright-report/
+
+# deployment archives
+*.zip
