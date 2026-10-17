@@ -1,207 +1,187 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import FlexibleCallout from '@/components/flexible-callout';
+import { useState } from "react";
+import { ArrowUpRight, Check, Clock3, Wallet, Sun, Moon } from "lucide-react";
+import LeadForm from "@/components/lead-form";
+import { SITE } from "@/lib/site";
 
-const pricingPlans = [
+const plans = [
   {
-    name: 'Class B CDL',
-    enrollLabel: 'Class B',
-    price: '2,500',
-    duration: '2-3 Weeks',
-    desc: 'Perfect for straight trucks, delivery, and passenger vehicles.',
+    name: "Class B CDL",
+    program: "Class B CDL Training",
+    price: "2,500",
+    duration: "2–3 weeks",
+    description: "Local routes. Lasting opportunity.",
     features: [
-      'Comprehensive Classroom Instruction',
-      'Pre-trip Inspection Training',
-      'Yard Skills & Maneuvers',
-      'City & Highway Driving',
-      '1 DMV Road Test Included',
+      "Classroom & pre-trip instruction",
+      "Yard skills and road practice",
+      "One DMV road test included",
     ],
-    recommended: false,
+    featured: false,
   },
   {
-    name: 'Class A CDL',
-    enrollLabel: 'Class A',
-    price: '4,500',
-    duration: '3-4 Weeks',
-    desc: 'The gold standard. Drive combination vehicles and 18-wheelers.',
+    name: "Class A CDL",
+    program: "Class A CDL Training",
+    price: "4,500",
+    duration: "3–4 weeks",
+    description: "Open the door to the open road.",
     features: [
-      'Everything in Class B, plus:',
-      'Combination Vehicle Mastery',
-      'Coupling & Uncoupling',
-      'Manual Transmission Option',
-      'Job Placement Assistance',
+      "Combination vehicle training",
+      "Coupling, backing & road skills",
+      "Manual transmission option",
+      "Job placement assistance",
     ],
-    recommended: true,
+    featured: true,
   },
   {
-    name: 'Refresher',
-    enrollLabel: 'Refresher',
-    price: '1,200',
-    duration: '1 Week',
-    desc: 'Get your skills verified and updated to return to the road.',
+    name: "Refresher Training",
+    program: "Refresher & On-the-Job Training",
+    price: "1,200",
+    duration: "1 week",
+    description: "Get back behind the wheel.",
     features: [
-      'Customized Skills Assessment',
-      'Logbook & Regulations Update',
-      'Targeted Maneuver Practice',
-      'Road Evaluation',
+      "Personalized skills assessment",
+      "Targeted maneuver practice",
+      "Road evaluation & feedback",
     ],
-    recommended: false,
+    featured: false,
   },
 ];
 
 export default function SchedulePricingSection() {
-  const [scheduleType, setScheduleType] = useState<'weekday' | 'weekend'>('weekday');
-
+  const [schedule, setSchedule] = useState("weekday");
   return (
-    <section
-      id="pricing"
-      className="py-16 md:py-24 bg-[#F5F3EF] relative z-10 border-t border-charcoal/5 scroll-mt-24"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-crimson mb-4">
-            Pricing & Schedule
+    <>
+      <section className="section pricing-section" id="pricing">
+        <div className="container">
+          <div className="center-heading">
+            <p className="eyebrow">INVEST IN YOUR NEXT CHAPTER</p>
+            <h2>
+              Your future.
+              <br className="mobile-only" /> <em>Within reach.</em>
+            </h2>
+            <p>Clear tuition. Flexible schedules. A practical path forward.</p>
+          </div>
+          <div className="schedule-picker" id="schedule">
+            <div className="schedule-options" aria-label="Class schedule">
+              <button
+                type="button"
+                aria-pressed={schedule === "weekday"}
+                onClick={() => setSchedule("weekday")}
+              >
+                <Sun size={16} /> Weekdays
+              </button>
+              <button
+                type="button"
+                aria-pressed={schedule === "flexible"}
+                onClick={() => setSchedule("flexible")}
+              >
+                <Moon size={16} /> Evenings & weekends
+              </button>
+            </div>
+            <p className="schedule-times" aria-live="polite">
+              <Clock3 size={15} />
+              {schedule === "weekday"
+                ? "Monday–Friday · 7:00 AM–3:30 PM"
+                : "Evenings · 5:00–9:00 PM  /  Sat–Sun · 7:00 AM–5:30 PM"}
+            </p>
+          </div>
+          <div className="pricing-grid">
+            {plans.map((plan) => (
+              <article
+                className={`pricing-card ${plan.featured ? "featured" : ""}`}
+                key={plan.name}
+              >
+                {plan.featured && (
+                  <span className="recommended">THE ROAD MOST TRAVELED</span>
+                )}
+                <h3>{plan.name}</h3>
+                <p>{plan.description}</p>
+                <div className="price">
+                  <small>From</small>
+                  <strong>${plan.price}</strong>
+                  <span>{plan.duration} · full-time</span>
+                </div>
+                <ul>
+                  {plan.features.map((feature) => (
+                    <li key={feature}>
+                      <Check size={16} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  className={`button ${plan.featured ? "button-primary" : "button-outline"}`}
+                  href={`?program=${encodeURIComponent(plan.program)}#apply`}
+                >
+                  Explore this path <ArrowUpRight size={17} />
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="pricing-footnote">
+            Published starting tuition and typical full-time timelines. Confirm
+            current pricing, inclusions, eligibility, and class availability
+            with admissions. Part-time completion times vary.
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-void tracking-tight">
-            Transparent Pricing. <br />
-            No Hidden Fees.
-          </h2>
-          <p className="mt-6 text-lg text-charcoal/80 leading-relaxed font-medium">
-            Invest in a career that pays you back. We offer competitive pricing, financial
-            aid for those who qualify, and flexible payment schedules to get you started
-            immediately.
-          </p>
+          <div className="aid-banner" id="financial-aid">
+            <span className="aid-icon">
+              <Wallet size={25} />
+            </span>
+            <div>
+              <h3>A little support can go a long way.</h3>
+              <p>
+                Financial aid for those who qualify. Flexible payment schedules.
+                Let’s explore your options.
+              </p>
+            </div>
+            <a href="#apply" className="text-link">
+              Talk financial aid <ArrowUpRight size={17} />
+            </a>
+          </div>
         </div>
-
-        {/* Schedule Toggle Area */}
-        <div id="schedule" className="mb-14 flex flex-col items-center scroll-mt-32">
-          <div className="bg-white p-1.5 rounded-full inline-grid grid-cols-2 relative shadow-sm border border-charcoal/10">
-            <button
-              onClick={() => setScheduleType('weekday')}
-              className={`relative z-10 px-8 py-3 text-sm font-bold rounded-full transition-colors ${
-                scheduleType === 'weekday' ? 'text-snow' : 'text-charcoal hover:text-void'
-              }`}
-            >
-              Weekday Classes
-            </button>
-            <button
-              onClick={() => setScheduleType('weekend')}
-              className={`relative z-10 px-8 py-3 text-sm font-bold rounded-full transition-colors ${
-                scheduleType === 'weekend' ? 'text-snow' : 'text-charcoal hover:text-void'
-              }`}
-            >
-              Weekend & Evening
-            </button>
-
-            {/* Active Pill background */}
-            <div
-              className={`absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-0.375rem)] bg-void rounded-full transition-transform duration-300 ease-in-out ${
-                scheduleType === 'weekday' ? 'translate-x-0' : 'translate-x-full'
-              }`}
+      </section>
+      <section className="section apply-section" id="apply">
+        <div className="container apply-grid">
+          <div className="apply-copy">
+            <p className="eyebrow">YOU DON’T NEED IT ALL FIGURED OUT</p>
+            <h2>
+              Just take
+              <br />
+              <em>the first step.</em>
+            </h2>
+            <p>
+              Tell us a little about yourself. Our admissions team will help you
+              find the right program, understand your options, and plan what
+              comes next.
+            </p>
+            <div className="apply-points">
+              <span>
+                <Check size={17} /> No obligation. Just a conversation.
+              </span>
+              <span>
+                <Check size={17} /> Support in English and Spanish.
+              </span>
+            </div>
+            <div className="apply-contact">
+              <span>Prefer a real conversation?</span>
+              <a href={SITE.phoneHref}>
+                {SITE.phone} <ArrowUpRight size={23} />
+              </a>
+            </div>
+          </div>
+          <div className="form-card">
+            <p className="eyebrow">LET’S GET YOU MOVING</p>
+            <h3>Your next chapter starts here.</h3>
+            <p>Request information about our programs.</p>
+            <LeadForm
+              variant="light"
+              sourceLabel="Admissions"
+              submitLabel="Request information"
             />
           </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={scheduleType}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="mt-7 flex flex-wrap items-center justify-center gap-4"
-            >
-              {(scheduleType === 'weekday'
-                ? [{ label: 'Mon – Fri', time: '7:00 AM – 3:30 PM' }]
-                : [
-                    { label: 'Sat & Sun', time: '7:00 AM – 5:30 PM' },
-                    { label: 'Mon – Fri Evenings', time: '5:00 PM – 9:00 PM' },
-                  ]
-              ).map((slot) => (
-                <div
-                  key={slot.label}
-                  className="flex items-center gap-3 bg-white px-6 py-3.5 rounded-2xl border border-charcoal/10 shadow-sm"
-                >
-                  <span className="font-bold text-void uppercase tracking-wide text-sm">
-                    {slot.label}
-                  </span>
-                  <span className="w-1 h-1 rounded-full bg-gold" />
-                  <span className="text-charcoal font-semibold text-sm">{slot.time}</span>
-                </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
         </div>
-
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-          {pricingPlans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative bg-white rounded-[2rem] p-8 ${
-                plan.recommended
-                  ? 'border-2 border-gold shadow-premium scale-105 z-10'
-                  : 'border border-charcoal/10 shadow-sm'
-              }`}
-            >
-              {plan.recommended && (
-                <div className="absolute -top-4 left-0 right-0 flex justify-center">
-                  <div className="bg-gold text-void text-xs font-bold uppercase tracking-[0.2em] px-5 py-1.5 rounded-full shadow-sm">
-                    Most Popular
-                  </div>
-                </div>
-              )}
-
-              <div className="mb-7">
-                <h3 className="text-2xl font-bold text-void mb-2">{plan.name}</h3>
-                <p className="text-charcoal/80 font-medium text-sm min-h-[40px]">{plan.desc}</p>
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-void">$</span>
-                  <span className="text-5xl font-extrabold text-void tracking-tight">
-                    {plan.price}
-                  </span>
-                  <span className="ml-2 text-sm font-bold uppercase tracking-widest text-charcoal/60">
-                    · {plan.duration}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-3.5 mb-8 border-t border-charcoal/10 pt-6">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-baseline gap-3">
-                    <span className="w-3.5 h-px bg-gold flex-shrink-0 translate-y-[-3px]" />
-                    <span className="text-sm text-charcoal font-medium leading-tight">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <a
-                href="#apply"
-                className={`flex items-center justify-center w-full rounded-xl py-4 text-lg font-bold transition-all hover:scale-[1.02] active:scale-[0.98] ${
-                  plan.recommended
-                    ? 'bg-void hover:bg-void/90 text-snow shadow-brutal'
-                    : 'bg-[#F5F3EF] hover:bg-charcoal/5 text-void border border-charcoal/10'
-                }`}
-              >
-                Enroll in {plan.enrollLabel}
-              </a>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Site-standard flexible payment callout — single placement */}
-        <div className="mt-16 max-w-6xl mx-auto">
-          <FlexibleCallout />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

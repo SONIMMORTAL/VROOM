@@ -1,50 +1,54 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-sans",
+const geist = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+const title = "Interstate Connections | Class A & B CDL Training";
+const description = `Build your next career with hands-on CDL training, bilingual instruction, and day, evening, and weekend classes. Call ${SITE.phone} to explore your options.`;
+const publicUrl = SITE.url;
+const socialImages = publicUrl
+  ? [
+      {
+        url: new URL("/social-preview.png", publicUrl).toString(),
+        width: 1200,
+        height: 630,
+        alt: "Interstate Connections — put your career in high gear.",
+      },
+    ]
+  : undefined;
 export const metadata: Metadata = {
-  title: "Interstate Connections | Class A & B CDL Training & Logistics",
-  description:
-    "Interstate Connections — professional Class A & B CDL training backed by 13+ years of experience. Bilingual instruction, flexible scheduling, and financial aid for those who qualify. Call (845) 663-5613 or email Info@interstateconnections.org.",
-  keywords: [
-    "CDL training",
-    "Class A CDL",
-    "Class B CDL",
-    "truck driving school",
-    "commercial driver license",
-    "bilingual CDL training",
-  ],
+  ...(publicUrl ? { metadataBase: new URL(publicUrl) } : {}),
+  title: { default: title, template: "%s | Interstate Connections" },
+  description,
   openGraph: {
-    title: "Interstate Connections | CDL Training & Logistics",
-    description:
-      "Professional CDL training backed by 13+ years of experience. Get your career in high gear — call (845) 663-5613.",
+    title,
+    description,
     type: "website",
+    locale: "en_US",
+    siteName: SITE.name,
+    url: publicUrl,
+    images: socialImages,
   },
+  twitter: {
+    card: socialImages ? "summary_large_image" : "summary",
+    title,
+    description,
+    images: socialImages,
+  },
+  icons: { icon: "/icon.png", apple: "/icon.png" },
 };
-
+export const viewport: Viewport = { themeColor: "#172d35" };
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={geist.variable}>
+      <body>{children}</body>
     </html>
   );
 }
